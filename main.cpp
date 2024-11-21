@@ -51,11 +51,8 @@ std::tuple<bool,int> metropolis(int x, int y){
 	int d = (y-1)*(y!=0)+(sitesy-1)*(y==0);//down
 	int u = (y+1)*(y!=sitesy-1);//up
 	double oldH = -J*(kroneckerDelta(s0,sites[l][y])+kroneckerDelta(s0,sites[r][y])+kroneckerDelta(s0,sites[x][u])+kroneckerDelta(s0,sites[x][d]));
-	//std::cout << oldH <<std::endl;
 	double newH = -J*(kroneckerDelta(sn,sites[l][y])+kroneckerDelta(sn,sites[r][y])+kroneckerDelta(sn,sites[x][u])+kroneckerDelta(sn,sites[x][d]));
-	//std::cout << newH <<std::endl;
 	float we = w(rd);
-	//std::cout << weight(newH-oldH) << " " << we <<std::endl;
 	double delH = newH-oldH;
 	if(delH <= 0){
 		return std::make_pair(true,sn);
@@ -71,11 +68,8 @@ int main(){
 	for(int i=0;i<N;i++){
 		int x = sitex(rd);
 		int y = sitey(rd);
-		//std::cout << x << " " << y << std::endl;
 		auto[change,sn] = metropolis(x,y);
-		//std::cout << change << " " << sn << std::endl;
 		sites[x][y] = sn;
-		//return 0;
 		if(change){
 			count++;
 		}
@@ -89,6 +83,4 @@ int main(){
     		}
 		}
 	}
-	
-	
 }
